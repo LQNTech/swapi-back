@@ -22,8 +22,14 @@ from graphene_django.views import GraphQLView
 from .schema import schema
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='graphql/')),
-    path('graphql/', csrf_exempt(GraphQLView.as_view(schema=schema))),
+    path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
     path('explore/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
     path('admin/', admin.site.urls),
 ]
+
+# urlpatterns = [
+#     path('', RedirectView.as_view(url='graphql/')),
+#     path('graphql/', csrf_exempt(GraphQLView.as_view(schema=schema))),
+#     path('explore/', csrf_exempt(GraphQLView.as_view(schema=schema, graphiql=True))),
+#     path('admin/', admin.site.urls),
+# ]
